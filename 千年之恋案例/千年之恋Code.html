@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>千年之恋</title>
+<link rel="stylesheet" type="text/css" href="css/qnzl.css">
+</head>
+<body>
+<div id="banner"> <img src="images/banner.jpg" alt="banner"> </div>
+<div id="content">
+<form action="#" method="post">
+  <h2>注册步骤：</h2>
+  <h3>您的账号信息：</h3>
+	<table width="445px">
+  <tbody>
+    <tr>
+      <td width="124">注册方式：</td>
+      <td><input type="radio" name="registerWay"/>E-mail注册&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="registerWay"/>手机号码注册</td>
+    </tr>
+    <tr>
+      <td>注册邮箱：</td>
+      <td><input class="pinkArea" type="email" name="email"/></td>
+    </tr>
+    <tr>
+      <td>注册手机：</td>
+      <td><input class="pinkArea" type="tel" pattern="^d\{11}$" name="tel"/></td>
+    </tr>
+    <tr>
+      <td>登录密码：</td>
+      <td><input class="pinkArea" type="password" name="pwd"/></td>
+    </tr>
+    <tr>
+      <td>昵称：</td>
+      <td><input class="pinkArea" type="text" name="nickname"/></td>
+    </tr>
+  </tbody>
+</table>
+
+  <h3>您的个人信息：</h3>
+  <table width="547" height="366">
+    <tr>
+      <td width="117">性别：</td>
+      <td><input type="radio" name="sex" checked="checked"/>
+        男
+        <input type="radio" name="sex"/>
+        女 </td>
+    </tr>
+    <tr>
+      <td>学历：</td>
+      <td><select name="xueli">
+          <option selected>-请选择-</option>
+          <option value="zz">高中/中专</option>
+          <option value="zk">本科/专科</option>
+          <option value="ss">硕士研究生</option>
+          <option value="bs">博士研究生</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td>所在城市：</td>
+      <td><select>
+		  <option>秦皇岛</option>
+          <option>北京</option>
+          <option>上海</option>
+          <option>广州</option>
+          <option>深圳</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td>兴趣爱好：</td>
+      <td><input type="checkbox" name="hobby" />
+        足球
+        <input type="checkbox" name="hobby" />
+        篮球
+        <input type="checkbox" name="hobby" />
+        游泳
+        <input type="checkbox" name="hobby" />
+        唱歌
+        <input type="checkbox" name="hobby" />
+        跑步
+        <input type="checkbox" name="hobby" />
+        游泳 </td>
+    </tr>
+    <tr>
+      <td>自我介绍：</td>
+      <td><textarea placeholder="评论的时候，请遵纪守法并注意语言文明，多给文档分享人一些支持。" ></textarea></td>
+    </tr>
+  </table>
+  <input type="image" style="margin-left:243px;" src="images/btn.jpg">
+</form>
+</div>
+</body>
+</html>
