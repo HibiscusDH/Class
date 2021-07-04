@@ -34,9 +34,9 @@ li{list-style:none;}
 #container .left .moretitle a{ color: #2A648C; padding-left: 6px;}
 #container .left .moretitle a:hover{text-decoration:none;}
 
-#container .left .newsimg .photo{float: left; background: url(../images/newsimg1.jpg); width: 325px; height: 245px; margin: 13px 0px 0px;}
+#container .left .newsimg .photo{float: left; width: 325px; height: 245px; }
 #container .left .newsimg .photo h2{width: 325px; height: 61px; border: 1px solid red; float:left;}
-#container .left .newsimg .photo img{width: 325px; height: 245px; }
+#container .left .newsimg .photo img{width: 325px; height: 245px;margin: 13px 0px 0px; }
 
 #container .left #newscontent{width: 371px; height: 262px; float: left; padding: 10px 0px 0px 8px; box-sizing: border-box;}
 #container .left #newscontent li{width: 361px; height: 28px; line-height: 28px; padding-left: 8px;}
