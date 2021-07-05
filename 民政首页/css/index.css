@@ -40,6 +40,7 @@ li{list-style:none;}
 
 #container .left #newscontent{width: 371px; height: 262px; float: left; padding: 10px 0px 0px 8px; box-sizing: border-box;}
 #container .left #newscontent li{width: 361px; height: 28px; line-height: 28px; padding-left: 8px;}
+#container .left #newscontent li:hover{background: #dcd5d5;}
 #container .left #newscontent a{font:12px "Microsoft YaHei"; color: #333333;}
 #container .left #newscontent .newstime{font:12px "Microsoft YaHei";color: #a6a9a2; float: right; height: 28px; line-height: 28px; padding-left: 8px;}
 
@@ -78,6 +79,7 @@ li{list-style:none;}
 #container .right .xiaoxi ul{padding-top: 10px; width: 282px; height: 92px; float: left;}
 #container .xiaoxi li{height: 27px; width: 282px; float:left;}
 #container .xiaoxi a{font: 12px "宋体"; color: #555752; padding: 5px 8px 0px 0px;}
+#container .rcpy li:hover{background: #dcd5d5;}
 
 #container .right .zxzt #hd{width: 282px; height: 34px; background: #21dbac; float: left;margin: 6px 0px 0px;}
 #container .right .zxzt #hd span{
