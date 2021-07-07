@@ -56,7 +56,7 @@ li{list-style:none;}
 
 
 
-#banner{ height: 340px; margin-bottom:50px;}
+#banner{ height: 340px;}
 
 #container{ width:1000px; height: 465px; margin: 0 auto;  box-sizing: border-box;}
 #container .left{ width:700px; height:465px;  float:left; margin-right:14px;}
