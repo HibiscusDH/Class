@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="newer">
+        <h1>vue组件属性操作</h1>
+        <h3>html标签的属性操作</h3>
+        <!-- 组件属性操作，通过标签定义的属性传入一个属性值到达标签内部完成功能的操作 -->
+        <a href="http://www.baidu.com">超链接标签</a>
+        
+        <h3>vue组件属性定义</h3>
+        <myimg mzxy="民政学院"></myimg>    
+        <myimg></myimg>
+        <myimg username="大漂亮" usertype="猛男"></myimg>
+    </div>
+    <script>
+        let run ={
+            //在vue的组件模板中添加props属性定义当前组件中需要获取值的属性
+            props:['mzxy','username','usertype'], 
+            template:`
+            <div>
+                组件属性值:src={{mzxy}},username={{username}},usertype={{usertype}}
+            </div>
+            `
+        }
+
+        let v = new Vue({
+            el:"#newer",
+            data:{},
+            components:{
+                'myimg':run
+            }
+        })
+
+    </script>
+</body>
+</html>

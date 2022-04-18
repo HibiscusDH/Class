@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    .ul{
+        width: 300px;
+        height: 400px;
+        float: left;
+        margin-right: 40px;
+
+    }
+
+    .main{
+        margin:0px auto;width: 1000px; height: 200px;background-color:gainsboro; 
+    }
+</style>
+<body>
+    <div id="newer">
+        <div class="main">
+            <h1>在线考试系统</h1>
+        </div>
+        <div class="main" v-if="page1">
+            <div>
+                <h1>
+                    完成
+                </h1>
+            </div>
+            <div>
+                <button>返回</button>
+                <button @click="showpage2">提交</button>
+            </div>
+        </div>
+        <div class="main" v-if="page2">
+            <p>得分:{{number}}分</p>
+           <div>
+               <div class="ul">
+                   <h3>正确答案</h3>
+                   <ul >
+                       <li  v-for="info in sysinfo">{{info.name}}:{{info.socre}}</li>
+                   </ul>
+               </div>
+               <div class="ul">
+                    <h3>您的答案</h3>
+                    <ul>
+                        <li  v-for="info in myinfo">{{info.name}}:{{info.socre}}</li>
+                    </ul>
+                </div>
+           </div>
+        </div>
+    </div>
+    <script>
+        let v=new Vue({
+            el:"#newer",
+            data:{
+                page1:true,  //用于控制完成页面信息的显示
+                page2:false,  //用于控制最后答案页面信息的显示
+                //系统正确答案
+                sysinfo:[{"name":"第一题","socre":"A"},{"name":"第二题","socre":"B"},{"name":"第三题","socre":"C"}],
+                //学员答题答案
+                myinfo:[{"name":"第一题","socre":"B"},{"name":"第二题","socre":"A"},{"name":"第三题","socre":"C"}],
+                //统计成绩分数
+                number:100
+            },
+            //通过钩子函数进行初始化操作
+            mounted(){
+                //定义一个数组的同步变量
+                var i =0;
+                while(i<3){
+                   if(this.sysinfo[i].socre != this.myinfo[i].socre){
+                        this.number-=20;
+                   }else{
+                        this.sysinfo[i].socre != this.myinfo[i].socre
+                   }
+                   i++;
+                }
+            },
+            methods:{
+                //定义一个点击提交后进入答案界面的方法
+                showpage2(){
+                    //当点击提交后改变vue中控制显示内容的属性值
+                    this.page1 = false;
+                    this.page2 = true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

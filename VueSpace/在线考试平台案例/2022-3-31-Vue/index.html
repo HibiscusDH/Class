@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    .main{
+        margin: 0px auto;
+        border: 1px solid gray;
+        width: 1000px;
+    }
+    .sp{
+        background-color: blue;
+    }
+    .bt{
+        
+    }
+</style>
+<body>
+    <div id="newer">
+        <div class="main">
+            <div>
+                <h1>在线考试平台</h1>
+                <h4>选择题</h4>
+            </div>
+            <div>
+                <div>
+                    <h1>
+                        {{info.title}}
+                        <!-- <span v-if="index == 2">(当前为最后一题)</span> -->
+                    </h1>
+                </div>
+                <hr>
+                <div>
+                    <p v-for="is in info.content">
+                        <input type="radio" name="info"><span class="sp">{{is.item}}</span>&nbsp;&nbsp;{{is.ct}}<Br/>
+                    </p>
+                    
+                    <!-- <input type="radio" name="info"><span class="sp">B</span>&nbsp;&nbsp;MYSQL<Br/>
+                    <input type="radio" name="info"><span class="sp">C</span>&nbsp;&nbsp;ORACLE<Br/>
+                    <input type="radio" name="info"><span class="sp">D</span>&nbsp;&nbsp;SQLSERVER<Br/> -->
+                </div>
+                <br/>
+                <button :disabled="disup" @click="up">上一题</button>
+                <button v-if="index !=2" @click="next">下一题</button>
+                <button v-if="index == 2">提交</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let v=new Vue({
+            el:"#newer",
+            data:{
+                //定义一个数组存储所有的题库
+                arrays:[
+                    {"title":"最流行的数据库?","content":[{"item":"A","ct":"DB2"},{"item":"B","ct":"MYSQL"},{"item":"C","ct":"ORACLE"},{"item":"D","ct":"SQLSERVER"}]},
+                    {"title":"最流行的开发语言?","content":[{"item":"A","ct":"JAVA"},{"item":"B","ct":".NET"},{"item":"C","ct":"PYTHON"},{"item":"D","ct":"C++"}]},
+                    {"title":"最流行的开发工具?","content":[{"item":"A","ct":"STS"},{"item":"B","ct":"DW"},{"item":"C","ct":"VSCODE"},{"item":"D","ct":"IDE"}]}
+                ],
+                //定义一个对象进行当前题目的存储
+                /**
+                 * 在vue中初始化属性可以通过两种方式：
+                 * 1、直接赋值
+                 * 2、通过钩子函数实现
+                */
+               //直接赋值
+                //info:{"title":"最流行的数据库?","content":[{"item":"A","ct":"DB2"},{"item":"B","ct":"MYSQL"},{"item":"C","ct":"ORACLE"},{"item":"D","ct":"SQLSERVER"}]}
+
+                info:{},
+                //定义一个属性记录当前所在的题目位置
+                index:0,
+                disup:true,
+            },
+            //通过vue生命周期钩子函数完成属性初始化
+            mounted(){
+                //当前区域中的脚本在网页加载的时候就会自动执行
+                this.info = this.arrays[this.index];
+            },
+            methods:{
+                //定义一个下一题的改变方法
+                next(){
+                    //将当前的题目索引进行改变
+                    this.index++;
+                    //将改变的题目索引作为当前需要获取的题目下标从题库中获取到数据
+                    this.info = this.arrays[this.index];
+                    //设置当前上一题按钮的状态
+                    this.disup=false;
+                },
+                //定义上一题的改变方法
+                up(){
+                    this.index--;
+                    this.info = this.arrays[this.index];
+                    //判断当前题目的索引是否为第一个题目
+                    if(this.index ==0){
+                        //将当前的上一题改变为不可使用
+                        this.disup=true;
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

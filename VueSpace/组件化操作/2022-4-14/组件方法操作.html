@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="newer">
+        <h1>组件方法操作</h1>
+        <run></run>
+    </div>
+    <script>
+        //定义一个模板对象
+        let run={
+            methods:{
+                play(){
+                    alert("精不精彩，意不意外");
+                }
+            },
+            template:`
+            <div>
+                <button @click="play">点击我一下有精彩</button>
+            </div>
+            `
+        }
+
+        let v=new Vue({
+            el:"#newer",
+            data:{},
+            methods:{
+                run(){
+                    alert("精不精彩，意不意外");
+                }
+            },
+            components:{
+                'run':run
+            }
+
+        })
+
+    </script>
+</body>
+</html>

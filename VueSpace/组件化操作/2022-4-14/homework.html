@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <!-- bootstrapCDN方式引入 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  </head>
+  <style>
+      .main{
+          width: 300px;
+          border: 1px solid gainsboro;
+          float: left;
+          margin-right: 30px;
+      }
+
+  </style>
+  <body>
+    <div id="newer">
+        <h1>人力资源管理平台</h1>
+        <div>
+            <!-- 左边员工录入表单 -->
+           <left></left>
+            <!-- 右边员工信息显示表格 -->
+            <right></right>
+
+            
+        </div>
+    </div>
+    <script>
+        // 定义模板对象存放组件内容
+        let left = {
+            template:`
+            <div class="main">
+                <form action="">
+                    <h3>录入员工信息</h3>
+                    姓名:<br/>
+                    <input type="text"/><br/>
+                    职位:<Br/>
+                    <select>
+                        <option value="程序员">程序员</option>
+                        <option value="软件工程师">软件工程师</option>
+                        <option value="CTO">CTO</option>
+                        <option value="系统架构师">系统架构师</option>
+                    </select><br/>
+                    <button>创建</button>
+                </form>
+            </div>
+            `
+        }
+
+        let right = {
+            template:`
+            <div  class="main">
+                <input type="text"><button>搜索</button><Br/>
+                <table border="1" width="500">
+                    <thead>
+                        <th>姓名</th>
+                        <th>职位</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <Tr>
+                            <Td>张三</Td>
+                            <Td>程序员</Td>
+                            <Td>
+                                <button>编辑</button>
+                                &nbsp;&nbsp;
+                                <button>删除</button>
+                            </Td>
+                        </Tr>
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            `
+        }
+
+
+      let v = new Vue({
+        //vue实例属性
+        el: "#newer",
+        data: {
+            // 存放着当前vue所有的属性值的区域
+        },
+        components:{
+            'left':left,
+            'right':right
+        }
+      });
+    </script>
+  </body>
+</html>

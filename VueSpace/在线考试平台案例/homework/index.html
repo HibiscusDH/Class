@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <style>
+    .main {
+      margin: 0px auto;
+      border: 1px solid gray;
+      width: 1000px;
+    }
+    .sp {
+      color: aliceblue;
+    }
+    #infoList p {
+      font-size: 30px;
+      background-color: #999;
+    }
+    .grades p {
+      width: 500px;
+      background-color: #999;
+      margin-bottom: 5px;
+      font-size: 30px;
+    }
+    .grades {
+      float: left; 
+    }
+  </style>
+  <body>
+    <div id="newer">
+      <div class="main">
+        <div>
+          <h1>在线考试平台</h1>
+          <h4>选择题</h4>
+        </div>
+        <div v-if=info_show>
+            <h1>
+              {{info.title}}
+              <!-- <span v-if="index == 2">(当前为最后一题)</span> -->
+            </h1>
+          <hr />
+          <div id="infoList">
+            <p v-for="is in info.content">
+              <input type="radio" name="info" :value="is.item" style="zoom: 1.5;"/>
+              <span class="sp">{{is.item}}</span>&nbsp;&nbsp;{{is.ct}}<br/>
+            </p>
+
+            <!-- <input type="radio" name="info"><span class="sp">B</span>&nbsp;&nbsp;MYSQL<Br/>
+                    <input type="radio" name="info"><span class="sp">C</span>&nbsp;&nbsp;ORACLE<Br/>
+                    <input type="radio" name="info"><span class="sp">D</span>&nbsp;&nbsp;SQLSERVER<Br/> -->
+          </div>
+        </div>
+        <div v-if=result_show>
+          <p style="font-size: 50px; font-weight: bold;">成绩:{{Math.round(this.grades)}}</p>
+          <div class="grades">
+            <p>结果</p>
+            <p v-for="is in result">
+              <span>{{is.item}}</span>&nbsp;&nbsp;{{is.ct}}</span>&nbsp;&nbsp;{{is.rs}}<br/>
+            </p>
+          </div>
+          <div class="grades">
+            <p>答案</p>
+            <p v-for="is in answer">
+              <span>{{is.item}}</span>&nbsp;&nbsp;{{is.ct}}<br/>
+            </p>
+          </div>
+        </div>
+        <div style="font-size: 100px; font-weight: bold; text-align: center;" v-if="index == 3">
+          <P>完成</P>
+        </div>
+        <div>
+          <br />
+          <button v-if=info_show :disabled="disup" @click="up">上一题</button>
+          <button v-if="index != 2 && index != 3 && index != 4" @click="next">下一题</button>
+          <button v-if="index == 2" @click="submit">提交</button>
+          <button v-if="index == 3" @click="back">返回</button>
+          <button v-if="index == 3" @click="finish">完成</button>
+        </div>
+        
+      </div>
+    </div>
+    <script>
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          //定义一个数组存储所有的题库
+          arrays: [
+            {
+              title: "最流行的数据库?",
+              content: [
+                { item: "A", ct: "DB2" },
+                { item: "B", ct: "MYSQL" },
+                { item: "C", ct: "ORACLE" },
+                { item: "D", ct: "SQLSERVER" },
+              ],
+            },
+            {
+              title: "最流行的开发语言?",
+              content: [
+                { item: "A", ct: "JAVA" },
+                { item: "B", ct: ".NET" },
+                { item: "C", ct: "PYTHON" },
+                { item: "D", ct: "C++" },
+              ],
+            },
+            {
+              title: "最流行的开发工具?",
+              content: [
+                { item: "A", ct: "STS" },
+                { item: "B", ct: "DW" },
+                { item: "C", ct: "VSCODE" },
+                { item: "D", ct: "IDE" },
+              ],
+            },
+          ],
+          //定义一个作答结果
+          result:[
+            {item:"第一题", ct:"", rs:""},
+            {item:"第二题", ct:"", rs:""},
+            {item:"第三题", ct:"", rs:""},
+          ],
+          //定义一个答案数组
+          answer:[
+            {item:"第一题", ct:"B"},
+            {item:"第二题", ct:"A"},
+            {item:"第三题", ct:"D"},
+          ],
+          //定义一个对象进行当前题目的存储
+          /**
+           * 在vue中初始化属性可以通过两种方式：
+           * 1、直接赋值
+           * 2、通过钩子函数实现
+           */
+          //直接赋值
+          //info:{"title":"最流行的数据库?","content":[{"item":"A","ct":"DB2"},{"item":"B","ct":"MYSQL"},{"item":"C","ct":"ORACLE"},{"item":"D","ct":"SQLSERVER"}]}
+
+          info: {},
+          //定义一个属性记录当前所在的题目位置
+          index: 0,
+          disup: true,
+          info_show:true, //题目信息的显示
+          j:0,
+          num:0,  //正确题个数
+          grades:0, //成绩
+          result_show:false,  //结果信息的显示
+          grades_show:false,  //成绩信息的显示
+        },
+        //通过vue生命周期钩子函数完成属性初始化
+        mounted() {
+          //当前区域中的脚本在网页加载的时候就会自动执行
+          this.info = this.arrays[this.index];
+        },
+        methods: {
+          //定义一个下一题的改变方法
+          next() {
+            //遍历radio，获取结果
+            this.select();
+            // var radionum = document.getElementsByName("info");
+            // for(var i=0;i<radionum.length;i++){
+            //   if(radionum[i].checked){
+            //     // this.result.push = radionum[i].value;
+            //     Vue.set(this.result[this.j], 'ct', radionum[i].value)
+            //     this.j++;
+            //   }
+            // }
+            //将当前的题目索引进行改变
+            this.index++;
+            //将改变的题目索引作为当前需要获取的题目下标从题库中获取到数据
+            this.info = this.arrays[this.index];
+            //设置当前上一题按钮的状态
+            this.disup = false;
+          },
+          //定义上一题的改变方法
+          up() {
+            this.index--;
+            this.j--;
+            this.info = this.arrays[this.index];
+            //判断当前题目的索引是否为第一个题目
+            if (this.index == 0) {
+              //将当前的上一题改变为不可使用
+              this.disup = true;
+            }
+          },
+          submit() {
+            this.index++;
+            this.info_show = false;
+            this.select();
+            // this.result_show = true;
+
+          },
+          back() {
+            this.info_show = true;
+            this.index = 2;
+            this.j--;
+            // this.result_show = false;
+            this.grades = 0;
+          },
+          select() {
+            var radionum = document.getElementsByName("info");
+            for(var i=0;i<radionum.length;i++){
+              if(radionum[i].checked){
+                // this.result.push = radionum[i].value;
+                Vue.set(this.result[this.j], 'ct', radionum[i].value)
+                this.j++;
+              }
+            }
+          },
+          finish() {
+            this.index=4;
+            for(i=0;i<this.result.length;i++) {
+              if(this.result[i].ct==this.answer[i].ct){
+                this.num += 1;
+                Vue.set(this.result[i], 'rs', "对")
+              }else {
+                Vue.set(this.result[i], 'rs', "错")
+              }
+              
+            }
+            this.grades = (100 / this.arrays.length) * this.num
+            // if(this.grades == (100 / this.arrays.length) * this.arrays.length){
+            //     this.grades = 100;
+            // }
+            this.result_show = true;
+            // alert(this.grades);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

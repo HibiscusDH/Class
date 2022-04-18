@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="newer">
+      字符串数据:{{str}}<br /><br />
+      数字类型：{{number}}<br /><br />
+      布尔类型：{{bool}}<br /><br />
+      数组数据：{{array[0]}}<br /><br />
+      对象数据：{{obj.name}}<br /><br />
+    </div>
+    <script>
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          //字符串类型属性
+          str: "字符串数据",
+          //数字类型属性
+          number: 120,
+          //布尔类型属性
+          bool: true,
+          //数组类型属性
+          array: ["如花", "小红"],
+          //对象类型属性
+          obj: { name: "翠花", age: 18 },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <style>
+    .d1 {
+      background-color: yellow;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+  <body>
+    <div id="newer">
+      <!-- 通过vue提供的双向数据绑定操作将一个文本框的数据添加到vue的属性中并在页面上进行获取 -->
+      <h3>v-model字符串绑定</h3>
+      <input type="text" v-model="str1" /> &nbsp;&nbsp;<span>{{str1}}</span
+      ><br /><br />
+      <h3>v-model数组绑定</h3>
+      <input type="text" v-model="array" /> &nbsp;&nbsp;<span>{{array}}</span
+      ><br />
+      <input type="checkbox" v-model="array1" value="撸啊撸" />撸啊撸
+      <input type="checkbox" v-model="array1" value="王者荣耀" />王者荣耀
+      <input type="checkbox" v-model="array1" value="DNF" />DNF
+      <input type="checkbox" v-model="array1" value="wow" />魔兽世界
+      &nbsp;&nbsp;<span>{{array1}}</span>
+
+      <h3>v-if指令</h3>
+      <span v-if="bool">我很帅</span><br /><br />
+
+      <h3>v-show指令</h3>
+      <span v-show="bool">我很帅</span><br /><br />
+
+      <h3>v-bind指令</h3>
+      <img v-bind:src="imglocal" v-bind:width="w" v-bind:height="h" /><br />
+      <div :class="cls"></div>
+    </div>
+    <script>
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          str1: "",
+          array: [],
+          array1: [],
+          bool: false,
+          imglocal: "img/a.webp",
+          w: 200,
+          h: 200,
+          cls: "d1",
+        },
+      });
+    </script>
+  </body>
+</html>

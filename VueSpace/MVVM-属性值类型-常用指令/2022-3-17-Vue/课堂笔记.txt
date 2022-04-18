@@ -1,0 +1,21 @@
+一、目标
+    1、了解vue.jsMVVM模式
+    2、掌握vue.js常用指令
+
+二、知识点
+    1、MVVM
+        属于vue中的一种软件设计模式，主要是用于体现vue框架的双向数据绑定现象。
+        MVVM :Model View ViewModel     --前端的操作
+        MVC : Model View Controller    --服务端的操作
+
+    2、vue属性值类型
+        vue的属性可以支持任意数据类型，例如：字符串、数字、布尔、数组、对象等
+
+    3、vue常用指令
+        v-Model
+        v-show
+        v-if
+        v-bind
+        v-for
+        v-on
+        ...

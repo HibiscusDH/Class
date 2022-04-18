@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="newer">
+      <h3>学员管理系统</h3>
+      <p>
+        学生学号:<input id="carid" type="text" v-model="user.id" /> 
+        学生姓名:<input id="name" type="text" v-model="user.name"/>
+        学生班级:<input id="classname" type="text" v-model="user.classname" />
+        <button id="btn" @click="add">添加学生信息</button>
+      </p>
+      <table border="1" width="400">
+        <thead>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>班级</th>
+          <th>操作</th>
+        </thead>
+        <tbody>
+          <tr v-for="(stu,index) in userinfo">
+            <td>{{stu.id}}</td>
+            <td>{{stu.name}}</td>
+            <td>{{stu.classname}}</td>
+            <td>
+              <button @click="remove(index)">删除</button>
+              <button @click="update(stu)">修改</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          userinfo: [
+            { id: "001", name: "萱艳", classname: "移动2032" },
+            { id: "002", name: "小萱艳", classname: "移动2032" },
+            { id: "003", name: "大萱艳", classname: "移动2032" },
+          ],
+          user: {},
+        },
+        methods: {
+          add() {
+            var value = document.getElementById('btn').innerText;
+            if(value == "添加学生信息"){
+              this.userinfo.push(this.user);
+              this.user = {};
+            }if(value == "修改"){
+              this.user = {};
+            }
+            document.getElementById("btn").innerHTML = "添加学生信息";
+          },
+          remove(index) {
+            this.userinfo.splice(index, 1);
+          },
+          update(stu){
+            var upMSG = document.getElementById("btn");
+            upMSG.innerHTML = "修改";
+            this.user = stu;
+    
+            // document.getElementById("carid").value = stu.id;
+            // document.getElementById("name").value = stu.name;
+            // document.getElementById("classname").value = stu.classname;
+            
+            // document.getElementById("btn").innerHTML = "添加学生信息";
+          }       
+        },
+      });
+    </script>
+  </body>
+</html>

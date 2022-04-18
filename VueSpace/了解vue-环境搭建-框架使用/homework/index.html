@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 从本地的js文件夹中关联vue框架库 -->
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <style>
+      .newer h1 {
+        text-align: center;
+      }
+      .msg table {
+        font-family: "宋体";
+        font-size: 20px;
+        margin: 0 auto;
+      }
+    </style>
+    <div class="newer">
+      <h1>{{title}}</h1>
+    </div>
+
+    <div class="msg">
+      <table>
+        <tr>
+          <th><ion-icon name="person-outline"></ion-icon> 姓名:</th>
+          <th>{{name}}</th>
+        </tr>
+        <tr>
+          <th><ion-icon name="school-outline"></ion-icon> 学校:</th>
+          <th>{{school}}</th>
+        </tr>
+        <tr>
+          <th><ion-icon name="desktop-outline"></ion-icon> 班级:</th>
+          <th>{{room}}</th>
+        </tr>
+        <tr>
+          <th><ion-icon name="call-outline"></ion-icon> 电话:</th>
+          <th>{{phone}}</th>
+        </tr>
+        <tr>
+          <th><ion-icon name="mail-outline"></ion-icon> 邮箱:</th>
+          <th>{{email}}</th>
+        </tr>
+      </table>
+    </div>
+    <script>
+      // 标题
+      var v = new Vue({
+        el: ".newer",
+        data: {
+          // 定义一个字符串数据用于在网页中显示
+          title: "个人简介",
+        },
+      });
+
+      var m = new Vue({
+        el: ".msg",
+        data: {
+          name: "董浩",
+          school: "长沙民政学院",
+          room: "移动2032",
+          phone: "18688889999",
+          email: "dh@qq.com",
+        },
+      });
+    </script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

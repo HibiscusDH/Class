@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="newer">
+        <login></login>
+        <tab></tab>
+        <lg></lg>
+        <tb></tb>
+    </div>
+    <script>
+        //定义一个全局组件包含登录部分标签内容
+        Vue.component("login",{
+            //需要添加的组件属性内容 -- vue的配置内容
+            /**
+             * template:模板，是vue组件化中用于设置当前组件内容的属性，存放在该属性中的数据
+             * 必须具备一下几个要求：
+             *      1、template属性的内容如果是引号(单双都一样)表示在当前属性中添加的标签内容
+             *          不能换行。
+             *      2、如果需要在编写的时候进行换行排版操作，基于ES6以后可以使用``进行标签内容
+             *         添加
+             *      3、所有添加在template中的标签必须具备一个根标签，不支持同级别的多个标签定义
+             */
+            template:`
+                <div>
+                    <h3>用户登录</h3>
+                    用户名:<input type="text" />
+                    密码:<input type="password"/>
+                    <button>登录</button>
+                </div>
+            `
+        })
+        
+        Vue.component("tab",{
+            template:`
+                <div>
+                    <h3>用户信息列表</h3>
+                    <table border="1" width="400">
+                        <thead>
+                            <th>用户名称</th>
+                            <th>用户密码</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>李四</td>
+                                <td>abc123</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
+        })
+
+
+        //定义登录的模板对象
+        var logins={
+            template:`
+                <h3>登录的模板组件</h3>
+            `
+        }
+        var tab={
+            template:`
+                <h3>表格的模板组件</h3>
+            `
+        }
+
+        let v= new Vue({
+            el:"#newer",
+            data:{},
+            components:{
+                'lg':logins,
+                'tb':tab
+            }
+        })
+    </script>
+</body>
+</html>

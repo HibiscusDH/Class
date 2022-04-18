@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 从本地的js文件夹中关联vue框架库 -->
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="newer">
+      <h1>{{message}}</h1>
+    </div>
+    <script>
+      // 定义一个当前页面的vue实例
+      var v = new Vue({
+        el: "#newer",
+        data: {
+          // 定义一个字符串数据用于在网页中显示
+          message: "我的第一个vue实例",
+        },
+      });
+    </script>
+  </body>
+</html>

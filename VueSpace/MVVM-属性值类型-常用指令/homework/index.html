@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping</title>
+    <script src="js/vue.js"></script>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      #newer .food {
+        padding: 10px;
+        border: 1px solid slategrey;
+        height: auto;
+        width: 200px;
+        font-family: Arial;
+      }
+      a {
+        text-decoration: none;
+        font-size: smaller;
+      }
+      a:hover {
+        color: red;
+      }
+      .price {
+        font-size: x-large;
+        color: red;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="newer">
+      <div class="food" style="margin: 100px">
+        <img :src="imglocal" :width="w" :height="h" />
+        <div :class="cls">
+          <strong>&yen;&nbsp;{{price}}</strong>
+        </div>
+        <a :href="u">{{text}}</a>
+      </div>
+    </div>
+    <script>
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          imglocal: "img/a.webp",
+          w: 200,
+          h: 240,
+          u: "https://item.jd.com/398965.html",
+          text: "立顿Lipton 绿茶 乐活三角茶包袋泡茶叶1.5g*20",
+          cls: "price",
+          price: "45.90",
+        },
+      });
+    </script>
+  </body>
+</html>

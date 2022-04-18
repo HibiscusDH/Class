@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="newer">
+        用户名<input type="text" v-model="username"/>
+        密码<input type="password" v-model="password"/>
+        <button @click="add">添加</button>
+        <br/><br/>
+        <userinfo :user="user"></userinfo>
+
+    </div>
+    <script>
+        let userinfo = {
+            props:["user"],
+            template:`
+            <div>
+                用户名={{user.username}}<br/>
+                密码={{user.password}}
+            </div>
+            `
+        }
+        let v=new Vue({
+            el:"#newer",
+            data:{
+                // 定义属性实现表单元素的双向绑定
+                username:'',
+                password:'',
+                user:{}
+            },
+            components:{
+                'userinfo':userinfo
+            },
+            methods:{
+                add(){
+                    this.user={"username":this.username,"password":this.password};
+                }
+            }
+
+        })
+
+
+    </script>
+
+</body>
+</html>
