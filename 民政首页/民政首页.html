@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>民政首页YD2董浩</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" href="css/index.css">
+<style>
+#box{
+    width: 1600px;
+    height: 340px;
+    margin: 0 auto;
+    background: url("images/banner_1.jpg") no-repeat;
+    background-size:cover;
+    transition: all 1s;
+    position: relative;
+}
+.icon_left{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 45%;
+    left:20px;
+}
+.icon_right{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 45%;
+    right:20px;
+}
+</style>
+<script>
+    var i=1;//表示当前图片所在位置
+    var time = setTimeout("showImg()", 2000);//启动时钟事件刷新时间 1000==1秒
+    function icon_left(){
+    clearTimeout(time)//清楚时钟事件
+    if(i<=1){
+        i=4;
+    }else{
+        i=i-2;
+    }
+    console.info(i)
+    showImg()
+}
+function icon_right(){
+    clearTimeout(time)//清楚时钟事件
+    showImg()
+}
+function showImg() { //让背景图片显示
+    i++;
+    if(i == 8) {//5表示图片有5张1\2\3\4\5
+        i = 1;
+    }
+    document.getElementById("box").style.background = "url(images/banner_" + i + ".jpg) no-repeat";
+    document.getElementById("box").style.backgroundSize = "cover";
+    //通过id获取标签并修改背景样式
+    time = setTimeout("showImg()", 2000);//启动时钟事件刷新时间 1000==1秒
+}
+</script>
+<style>    
+#image{
+    width: 282px; height: 76px; margin: 4px 0px 0px;
+    float: left;
+    background: url("images/shce_1.png") no-repeat;
+    background-size:contain;
+    transition: all 1s;
+    position: relative;
+}
+.cont_left{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 45%;
+    right:10px;
+}
+.cont_right{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 45%;
+    right:20px;
+}
+</style>
+<script>
+    var j=1;//表示当前图片所在位置
+    var time = setTimeout("showcont()", 2000);//启动时钟事件刷新时间 1000==1秒
+    function cont_left(){
+    clearTimeout(time)//清楚时钟事件
+    if(j<=1){
+        j=4;
+    }else{
+        j=j-2;
+    }
+    console.info(i)
+    showImg()
+}
+function cont_right(){
+    clearTimeout(time)//清楚时钟事件
+    showImg()
+}
+function showcont() { //让背景图片显示
+    j++;
+    if(j == 3) {//5表示图片有5张1\2\3\4\5
+        j = 1;
+    }
+    document.getElementById("image").style.background = "url(images/shce_" + j + ".png) no-repeat";
+    document.getElementById("image").style.backgroundSize = "contain";
+    //通过id获取标签并修改背景样式
+    time = setTimeout("showcont()", 2000);//启动时钟事件刷新时间 1000==1秒
+}
+</script>
+
+
+</head>
+<body>
+    <div id="header">
+    	<div id="nav">
+            <div class="logo"><img src="images/logo.jpg"></div>
+            <div id="menu" style="position:relative">
+            <div id="hd_title">
+                <ul>
+                    <li id="hd1"><a href="#"><div class="wenzi">学院概况</div><div class="yewen">Introduction</div></a>
+                        <ul id="sub1" style="position:absolute; z-index:10; left:0px;top: 60px;">
+                            <li><a href="#">&bull;学校简介</a></li>
+                            <li><a href="#">&bull;学校领导</a></li>
+                            <li><a href="#">&bull;校训释义</a></li>
+                            <li><a href="#">&bull;手绘民院</a></li>
+                            <li><a href="#">&bull;新媒体</a></li>
+                        </ul>
+                    </li>
+                    <li id="hd2"><a href="#"><div class="wenzi">院部设置</div><div class="yewen">Colleges</div></a>
+                        <ul id="sub2" style="position:absolute; z-index:10; left:0px;top: 60px;">
+                            <h3>学院</h3>
+                            <div id="sub21">
+                            <li><a href="#">&bull;民政与社会工作</a></li>
+                            <li><a href="#">&bull;商学院</a></li>
+                            <li><a href="#">&bull;软件学院</a></li>
+                            <li><a href="#">&bull;外语学院</a></li>
+                            <li><a href="#">&bull;电子信息工程学院</a></li>
+                            <li><a href="#">&bull;艺术学院</a></li>
+                            <li><a href="#">&bull;医学院</a></li>
+                            <li><a href="#">&bull;财经管理学院</a></li>
+                            </div>
+                            <h3>教学部</h3>
+                            <li><a href="#">&bull;通识教育中心</a></li>
+                            <li><a href="#">&bull;体育部</a></li>
+                            <li><a href="#">&bull;马克思主义学院</a></li>
+                        </ul>
+                    </li>
+                    <li id="hd3"><a href="#"><div class="wenzi">招生就业</div><div class="yewen">Enrollment/Employment</div></a>
+                        <ul id="sub3" style="position:absolute; z-index:10; left:0px;top: 60px;">
+                            <li><a href="#">&bull;单独招生</a></li>
+                            <li><a href="#">&bull;普通招生</a></li>
+                            <li><a href="#">&bull;就业智慧网</a></li>
+                            <li><a href="#">&bull;创新创业网</a></li>
+                        </ul>
+                    </li>
+                    <li id="hd4"><a href="#"><div class="wenzi">党务公开</div><div class="yewen">PartyOpenness</div></a>
+                        <ul id="sub4" style="position:absolute; z-index:10; left:0px;top: 60px;">
+                            <li><a href="#">&bull;党建动态</a></li>
+                            <li><a href="#">&bull;支部活动</a></li>
+                            <li><a href="#">&bull;党校</a></li>
+                            <li><a href="#">&bull;总支动态</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            </div>
+
+        	<div id="yellow_block" style="position: absolute; z-index: 3">
+                <div id="top">
+                    <p><a href="#">网站首页</a></p>
+                    <p><a href="#">招生信息</a></p>
+                    <p><a href="#">加入收藏</a></p>
+                    <p><a href="#" style="border-right: none;">人才引进</a></p>
+                </div>
+                <div id="middle">
+                    <select id="student" onmouseover="openSelect(this);">
+                        <option value="volvo">管理与服务机构</option>
+                        <option value="saab">管理与服务机构</option>
+                        <option value="opel">管理与服务机构</option>
+                        <option value="audi">管理与服务机构</option>
+                      </select>
+                      <select>
+                        <option value="volvo">常用网站</option>
+                        <option value="saab">管理与服务机构</option>
+                        <option value="opel">管理与服务机构</option>
+                        <option value="audi">管理与服务机构</option>
+                      </select>
+                </div>
+                <div id="bottom">
+                    <p><a href="#">教职工</a></p>
+                    <p><a href="#">学生</a></p>
+                    <p><a href="#">校友</a></p>
+                    <p><a href="#" style="border-right: none;">考生及访客</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="banner">
+        <div id="box">
+            <img class="icon_left" src="images/btnR.png" onclick="icon_left()">
+            <img class="icon_right" src="images/btnL.png" onclick="icon_right()">
+        </div>
+    </div>
+    <div id="container">
+    	<div class="left">
+            <div class="moretitle">
+                <ul>
+                    <li><a href="#">民院要闻</a></li>
+                    <li><a href="#">校园动态</a></li>
+                    <li><a href="#">媒体民院</a></li>
+                    <li><a href="#">政策速递</a></li>
+                    <li><a href="#" style="font-weight:bold;color:#ff0000;">抗击疫情</a></li>
+                    <p style="float: right; padding: 5px 0px 0px; "><a href="#" style="font:12px 'Microsoft YaHei'; color: #000000;">更多+</a></p>
+                </ul>
+            </div>
+            <div class="newsimg">
+
+                <div class="photo">
+                    <img src="images/newsimg1.jpg">
+                    <!--<h2><a href="#" style="font-size:14px; margin: 0;padding: 0px;">我校召开2021年书记谈心会暨大学生“西部计划”志愿者欢送会</a></h2>-->
+                </div>
+
+                <div id="newscontent">
+                    <ul>
+                        <li><span class="newstime">2021-07-02</span><a href="info/1014/67421.htm" target="_blank" title="我校召开2021年书记谈心会暨大学生“西部计划”志愿者欢送会">我校召开2021年书记谈心会暨大学生“西部计划”志</a></li>
+                        <li><span class="newstime">2021-07-02</span><a href="info/1014/67419.htm" target="_blank" title="请党放心，强国有我，技能兴邦，学业报国——我校举行第六十四期校长沙龙">请党放心，强国有我，技能兴邦，学业报国——我校</a></li>
+                        <li><span class="newstime">2021-07-02</span><a href="info/1014/67414.htm" target="_blank" title="长沙民政职业技术学院广泛组织师生集体收看庆祝中国共产党成立100周年大会盛况">长沙民政职业技术学院广泛组织师生集体收看庆祝中</a></li>
+                        <li><span class="newstime">2021-07-01</span><a href="info/1014/67412.htm" target="_blank" title="国际交流处（港澳台交流办、国际教育学院）学习习近平总书记在庆祝中国共产党成立100周年大会上重要讲话精神 李斌校长参加">国际交流处（港澳台交流办、国际教育学院）学习习</a></li>
+                        <li><span class="newstime">2021-07-01</span><a href="info/1014/67400.htm" target="_blank" title="庆祝建党百年 开展走访慰问">庆祝建党百年 开展走访慰问</a></li>
+                        <li><span class="newstime">2021-07-01</span><a href="info/1014/67393.htm" target="_blank" title="党务工作中的一抹最美巾帼红—记湖南省优秀党务工作者刘亚琴">党务工作中的一抹最美巾帼红—记湖南省优秀党务工</a></li>
+                        <li><span class="newstime">2021-06-30</span><a href="info/1014/67392.htm" target="_blank" title="我校男篮获第23届中国大学生篮球三级联赛全国总决赛冠军">我校男篮获第23届中国大学生篮球三级联赛全国总决</a></li>
+                        <li><span class="newstime">2021-06-30</span><a href="info/1014/67389.htm" target="_blank" title="学校举行庆祝中国共产党成立100周年合唱比赛">学校举行庆祝中国共产党成立100周年合唱比赛</a></li>
+                        <li><span class="newstime">2021-06-30</span><a href="info/1014/67388.htm" target="_blank" title="长沙民政职院向老党员颁发“光荣在党50年”纪念章">长沙民政职院向老党员颁发“光荣在党50年”纪念章</a></li>
+                     </ul>
+                </div>
+
+            </div>
+            
+        	<div class="xxgk">
+                <div class="xxgk_title">信息公开</div>
+                <div class="title_red">
+                    <div class="intro1">
+                        <a href="#">学院简介</a>
+                        <a href="#">领导信息</a>
+                        <a href="#">办事指南</a>
+                        <a href="#">采购招标</a>
+                        <a href="#">新媒体</a>
+                        <a href="#">政策咨询</a>
+                    </div>
+                    <div class="intro2">
+                        <a href="#">意见建议</a>
+                        <a href="#">舆情反映</a>
+                        <a href="#">求助帮扶</a>
+                        <a href="#">处理结果</a>
+                    </div>
+                    <div class="intro3" style="border: none;">
+                        <a href="#">招生考试</a>
+                        <a href="#">财务资产</a>
+                        <a href="#">人事师资</a>
+                        <a href="#">教育教学</a>
+                        <a href="#">学生管理</a>
+                        <a href="#">学风建设</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+        	<div class="znss">
+            	<form action="#" method="get">
+            		<span style="font-size:14px; margin-right:12px;">站内搜索:</span>
+                    <input style="width:146px; height:24px;" type="search"/>
+                    <input style="width:45px;" type="submit" value="搜索"/>
+                </form>
+            </div>
+            <div class="rcpy">
+            	<span style=" border-bottom:2px solid #2A648C; float:left; height:45px; padding-top:20px; box-sizing:border-box; width:80px; text-align:center; color: #2A648C;">人才培养</span>
+                <a href="#"><span style="float:right; font-size:14px; color:#ccc; padding-top:24px; box-sizing:border-box;">更多+</span></a>
+                <ul>
+                    <li class="jwc"><a href="#">教务处</a></li>
+                    <li class="xgc"><a href="#">学工处</a></li>
+                    <li class="zsb"><a href="#">招生办</a></li>
+                    <li class="jxjy"><a href="#">继续教育学院</a></li>
+                </ul> 
+            </div>
+            <div class="xiaoxi">
+                <ul>
+                    <li><a href="#">我校开展专业教学团队建设专题培训</a></li>
+                    <li><a href="#">我校召开2021年上学期第三次院部长会议</a></li>
+                    <li><a href="#">副校长李科带队前往省教育科学研究院汇报交流</a></li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="zxzt">
+                <div id="hd" style="position:relative">
+                    <span style="line-height: 34px;">最新专题</span>
+                    <img class="cont_left" src="images/contR.jpg" onclick="cont_left()">
+                    <img class="cont_right" src="images/contL.jpg" onclick="cont_right()">
+                </div>
+                <div id="image"></div>
+            </div>
+        </div>
+    </div>
+    <div id="ygfw">
+        <div class="content">
+            <div class="ygtitle"></div>
+            <div class="fwdt">
+                <p class="title">阳光服务大厅</p>
+                <p><a href="#">政策咨询</a></p>
+                <p><a href="#">信息公开</a></p>
+                <p><a href="#">投诉受理</a></p>
+                <p><a href="#">舆情反映</a></p>
+            </div>
+            <div class="zxfw">
+                <p class="title">在线服务</p>
+                <p><a href="#">一站式服务大厅（校外）</a></p>
+                <p><a href="#">一站式服务大厅（校内）</a></p>
+                <p><a href="#">企业邮箱</a></p>
+                <p><a href="#">教务管理系统</a></p>
+            </div>
+            <div class="cyzl">
+                <p class="title">常用专栏</p>
+                <p><a href="#">教学门户（云课堂）校报网</a></p>
+                <p><a href="#">教学诊断与改进专题网</a></p>
+                <p><a href="#">专业人才培养方案</a></p>
+                <p><a href="#">双高校专栏</a></p>
+            </div>
+            <div class="erwm"><p>官方微信扫一扫</p></div>
+        </div>
+    </div>
+    <div id="yqlj">
+        <div class="yqlj_text">
+          友情链接：  
+        <a href="#">湖南政务服务网</a>
+        <a href="#">湖南教育网</a>
+        <a href="#">为先在线</a>
+        <a href="#">湖南教育政务网</a>
+        <a href="#">全国职业院校学生职业素养培育联盟</a>
+    </div>
+    </div>
+    <div id="footer">
+        <div class="ending">
+        <div class="homeindex">
+            长沙民政职业技术学院 2015 版权所有 网站图片、视频等未经允许请勿转载 网站设计：图书信息中心 通讯地址:湖南长沙香樟路22号&nbsp;邮编:410004
+            <br>
+            Email:csmzxydzb@csmzxy.edu.cn 电话: 0731-82763288（招生电话）,0731-82804000（党政办） 传真:0731-82804325 学生资助热线：0731-82823961
+            <br>
+            1280以上分辨率效果最佳; 
+            <a href="http://beian.miit.gov.cn" style="color: #FFFFFF;">湘ICP备14001965号</a>  湘教QS3-200911-001116
+        </div>
+        <a href="#"><img style="float: left;" src=images/blue.png></a>
+    </div>
+    </div>
+    <!--我努力的把代码写规整、漂亮，但大多都是在拆东墙补西墙，拼拼凑凑才完成-->
+</body>
+</html>
