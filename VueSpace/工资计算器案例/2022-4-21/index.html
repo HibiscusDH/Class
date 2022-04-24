@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入bootstrap样式库 -->
+    <link rel="stylesheet" href="css/bootstrap4.css">
+    <!-- 引入vue核心库 -->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="newer" class="container-fluid">
+        <!-- 
+            bootstrap中页面布局需要通过页面容器进行包含，同时通过栅格系统对页面内容
+            进行排版
+         -->
+        <div class="jumbotron">
+            <h1 class="display-3">添加信息，年龄占比</h1>
+        </div>
+        <mypro :sty="width" :number="textContent"></mypro>
+        <!-- 通过栅格系统对下半部分内容进行排版 -->
+        <div class="row">
+            <!-- 添加左边表单区域内容 -->
+            <myform :us="users"  :addclick="addusers"></myform>
+            <!-- 添加右边表格区域内容 -->
+            <mytable :ay="arrays" :del="del"></mytable>
+        </div>
+    </div>    
+    <script>
+        // 定义进度条组件
+        let mypro = {
+            // 定义接收统计年轻人人数的属性
+            props:['sty','number'],
+            template:`
+            <div class="progress">
+                <div class="progress-bar bg-danger  progress-bar-striped" role="progressbar" :style="sty" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{number}}</div>
+            </div>
+            `
+        }
+
+        // 定义表单组件对象
+        let myform = {
+            // 定义一个属性接收外部传入的数据
+            props:['us','addclick'],
+            template:`
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="">姓名</label>
+                  <input type="text" v-model="us.user" name="" id="" class="form-control" placeholder="请输入姓名" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">年龄</label>
+                  <input type="text" v-model="us.age" name="" id="" class="form-control" placeholder="请输入年龄" aria-describedby="helpId">
+                </div>
+                <button type="button" @click="addclick" class="btn btn-primary btn-block btn-lg">提交信息</button>
+            </div>
+            `
+        }
+        // 定义表格组件对象
+        let mytable ={
+            // 定义一个接收vue中数组数据的属性
+            props:["ay","del"],
+            template:`
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">名字</th>
+                        <th scope="col">年龄</th>
+                        <th scope="col">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="us,index in ay">
+                        <td>{{us.user}}</td>
+                        <td>{{us.age}}</td>
+                        <td>
+                            <button @click="del(index)" type="button" class="btn btn-warning">删除</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            `
+        }
+
+
+        let v=new Vue({
+            el:"#newer",
+            data:{
+                // 定义一个接收表单输入的对象
+                users:{},
+                // 定义一个存储数据的数组，同时提供给表格获取数据
+                arrays:[],
+                // 定义一个统计总人数的属性
+                usercount:0,
+                // 定义一个统计年轻人比例的人数属性
+                young:0,
+            },
+            methods:{
+                //定义添加数据到数组的方法
+                addusers(){
+                    //在每次添加一个用户信息的时候需要进行用户总人数的自增
+                    this.usercount++;
+                    //将当前添加的用户存储到数组中
+                    this.arrays.push(this.users);
+                    //判断当前用户是否属于年轻人
+                    if(this.users.age>=25 && this.users.age<=35){
+                        //实现年轻人人数的自增
+                        this.young++;
+                    }   
+                    this.users={};
+                },
+                // 定义指定索引删除的方法
+                del(index){
+                    // 在点击删除按钮的时候提示用户选择的操作
+                    if(confirm("是否删除当前选择用户数据")){
+                        this.arrays.splice(index,1);
+                        alert("删除成功");
+                    }
+                }
+            },
+            //通过vue在加载的时候对属性进行操作的区域控制显示
+            computed:{
+                // 设置样式方法
+                width(){
+                    var num= this.young/this.usercount*100;
+                    return `width:${num}%`;
+                },
+                textContent(){
+                    if(this.usercount == 0 ){
+                        return "当前没有用户数据";
+                    }else{
+                        var num= this.young/this.usercount*100;
+                        return `年轻人占比:${Math.floor(num)}%`;
+                    }
+                }
+            },
+            components:{
+                'mypro':mypro,
+                'myform':myform,
+                'mytable':mytable
+            }
+        })
+
+    </script>
+
+</body>
+</html>

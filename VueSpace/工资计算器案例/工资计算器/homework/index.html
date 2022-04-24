@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!--引入bootstrap js插件-->
+    
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <!-- 引入bootstrap样式库 -->
+    <link rel="stylesheet" href="css/bootstrap4.css">
+    <!-- 引入vue核心库 -->
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!-- 引入自定义CSS样式 -->
+    <style>
+      table th {
+        vertical-align: middle!important;
+        text-align: center; 
+      }
+      #header {
+        border: 1px solid gainsboro;
+        padding: 20px;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 只实现了税前工资的计算 -->
+
+    <div id="newer" style="user-select:none">
+      <!-- 导航条 -->
+      <nav_bar></nav_bar>
+
+      <!-- 表单 -->
+      <div class="container" id="header">
+        <h4>"长沙"五险一金及税后工资计算器</h4>
+        <div class="form-group">
+          <label for="InputBeforeTax">税前工资:</label>
+          <input type="email" class="form-control" id="InputBeforeTax" v-model="taxBefor">
+        </div>
+        <div class="form-group">
+          <label for="InputAfterTax">到手工资:</label>
+          <input type="password" class="form-control" id="InputAfterTax" v-model="taxAfter">
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <button @click="culate" type="submit" class="btn btn-success btn-block">计算</button>
+          </div>
+          <div class="col-sm">
+            <button @click="recalculate" type="submit" class="btn btn-danger btn-block">重新计算</button>
+          </div>
+        </div>
+      </div>
+      <!-- 表格信息 -->
+      <table_info :individual_tax="individual_tax" :employer_tax="employer_tax"></table_info>
+      <div class="container" style="padding: 0px; text-align:right;">
+        <p><a href="#" onclick="javascript:alert('我也不会算啊！！！')">具体怎么算呢?</a></p>
+      </div>    
+      <!-- 页脚 -->
+      <ending></ending>
+
+      <!-- 五险一金缴纳比例表 -->
+      <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">五险一金缴纳比例表</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">养老保险</th>
+                    <th scope="col">医疗保险</th>
+                    <th scope="col">失业保险</th>
+                    <th scope="col">工伤保险</th>
+                    <th scope="col">生育保险</th>
+                    <th scope="col">住房公积金</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>个人部分</th>
+                    <td>8.00%</td>
+                    <td>2.00%</td>
+                    <td>0.30%</td>
+                    <td>0.00%</td>
+                    <td>0.00%</td>
+                    <td>10.00%</td>
+                  </tr>
+                  <tr>
+                    <th>单位部分</th>
+                    <td>19.00%</td>
+                    <td>8.00%</td>
+                    <td>0.70%</td>
+                    <td>0.70%</td>
+                    <td>0.70%</td>
+                    <td>10.00%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 个税缴纳比例表 -->
+      <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">五险一金缴纳比例表</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">级数</th>
+                    <th scope="col">全年应缴所得税额</th></th>
+                    <th scope="col">税率(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <td>不超过36000元的</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <th>2</th>
+                    <td>超过36000元至144000元的部分</td>
+                    <td>10</td>
+                  </tr>
+                  <tr>
+                    <th>3</th>
+                    <td>超过144000元至300000元的部分</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <th>4</th>
+                    <td>超过300000元至420000元的部分</td>
+                    <td>25</td>
+                  </tr>
+                  <tr>
+                    <th>5</th>
+                    <td>超过420000元至660000元的部分</td>
+                    <td>30</td>
+                  </tr>
+                  <tr>
+                    <th>6</th>
+                    <td>超过660000元至960000元的部分</td>
+                    <td>35</td>
+                  </tr>
+                  <tr>
+                    <th>7</th>
+                    <td>超过960000元的部分</td>
+                    <td>45</td>
+                  </tr>         
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <script>
+      let nav_bar = {
+        template:`
+          <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">工资计算器</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <!-- 下拉菜单 -->
+                <!-- 点击没有反应，未解决 -->
+                <li class="nav-item dropdown active navbar-nav">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="true">
+                    城市
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">长沙</a>
+                    <a class="dropdown-item" href="#">深圳</a>
+                    <a class="dropdown-item" href="#">秦皇岛</a>
+                  </div>
+                </li>
+
+                <li class="nav-item active">
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#Modal1">五险一金缴纳比例表</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#Modal2">个税缴纳比例表</a>
+                </li>
+              </ul>
+              <!-- 搜索框 -->
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+        `,
+      };
+
+
+      let table_info = {
+        props:['individual_tax','employer_tax'],
+        template:`
+          <table class="table table-bordered table-striped container">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" colspan="2">缴存项目</th>
+                <th scope="row" colspan="2">个人部分</th>
+                <th scope="row" colspan="2">单位部分</th>
+              </tr>
+              <tr>
+                <th scope="col">缴纳比例</th><th scope="col">缴纳金额(元)</th><th scope="col">缴纳比例</th><th scope="col">缴纳金额(元)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" rowspan="5">五险</th><td>养老保险</td><td>8.00%</td><td>{{individual_tax[0]}}</td><td>19.00%</td><td>{{employer_tax[0]}}</td>
+              </tr>
+              <tr>
+                <td>医疗保险</td><td>2.00%</td><td>{{individual_tax[1]}}</td><td>8.00%</td><td>{{employer_tax[1]}}</td>
+              </tr>
+              <tr>
+                <td>失业保险</td><td>0.30%</td><td>{{individual_tax[2]}}</td><td>0.70%</td><td>{{employer_tax[2]}}</td>
+              </tr>
+              <tr>
+                <td>工伤保险</td><td>0.00%</td><td>{{individual_tax[3]}}</td><td>0.70%</td><td>{{employer_tax[3]}}</td>
+              </tr>
+              <tr>
+                <td>生育保险</td><td>0.00%</td><td>{{individual_tax[4]}}</td><td>0.70%</td><td>{{employer_tax[4]}}</td>
+              </tr>
+              <tr>
+                <th>一金</th><td>住房公积金</td><td>10.00%</td><td>{{individual_tax[5]}}</td><td>10.00%</td><td>{{employer_tax[5]}}</td>
+              </tr>
+              <tr>
+                <th colspan="2"></th><td colspan="2">个人共纳税：{{this.$parent.individual_tax_total}}</td><td colspan="2">单位共纳税：{{this.$parent.employer_tax_total}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">总纳税：{{this.$parent.tax_total}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">扣除五险一金后工资：{{this.$parent.final_salary}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">个人所得税：{{this.$parent.income_tax}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">到手工资：{{this.$parent.finalfinal_salary}}</td>
+              </tr>
+            </tbody>
+          </table>
+        `,
+      };
+
+
+
+      // 页脚
+      let footer = {
+        template: `
+          <div class="navbar navbar-dark bg-primary text-white">
+            <p class="m-auto">Copyright&copy;2018 newer 版权所有</p>
+          </div>
+        `,
+      };
+
+
+      let v = new Vue({
+        el: "#newer",
+        data: {
+          // 定义两个纳税比例数组，计算纳税金额
+          individualList:[0.08, 0.02, 0.003, 0, 0, 0.1],
+          employerList:[0.19, 0.08, 0.007, 0.007, 0.007, 0.1],
+          // 定义两个纳税金额数组，放到表格中显示
+          individual_tax:[],
+          employer_tax:[],
+          // 定义两个变量，与input绑定，获取工资金额
+          taxBefor:null,
+          taxAfter:null,
+          // 定义两个变量，存储个人和工资的纳税总额
+          individual_tax_total:null,
+          employer_tax_total:null,
+          // 定义一个总纳税变量
+          tax_total:null,
+          // 扣除五险一金后的工资
+          final_salary:null,
+          // 定义一个个人所得税变量
+          income_tax:null,
+          // 到手工资
+          finalfinal_salary:null,
+
+          salaryList:[5000, 36000, 144000, 300000, 420000, 660000, 960000],
+          taxList:[0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45],
+        },
+        methods:{
+          // 计算按钮的方法
+          culate(){
+            // 遍历缴纳比例数组，与税前工资进行计算
+            for (let index = 0; index < this.individualList.length; index++) {
+              // 个人税的计算
+              const a = Math.round(this.taxBefor * this.individualList[index]);
+              // 单位税的计算
+              const b = Math.round(this.taxBefor * this.employerList[index]);
+              // 把缴纳金额添加到表格
+              this.individual_tax.push(a);
+              this.employer_tax.push(b);
+              // 计算个人和单位的纳税总和
+              this.individual_tax_total+=a;
+              this.employer_tax_total+=b
+              this.tax_total = this.individual_tax_total + this.employer_tax_total;
+              this.final_salary = this.taxBefor - this.individual_tax_total;
+              
+            }
+            this.income_taxCulate();
+            this.finalfinal_salary = this.final_salary - this.income_tax;
+          },
+          // 重新计算方法
+          recalculate(){
+            
+            
+          },
+          // 个人所得税计算
+          income_taxCulate() {
+            // 判断扣除五险一金后的工资是否达到5000元起征点
+            if (this.final_salary < 5000) {
+              // 未到起征点的个人所得税为0元
+              this.income_tax = 0;
+            }else {
+              // 遍历个人所得税分段金额
+              for (let i = this.salaryList.length; i >= 0; i--) {
+                /**
+                 * 如果final_salary（扣除五险一金后工资）大于起征点，
+                 * 让final_salary减掉起征点，与税收比例相乘
+                 * 
+                */
+                if (this.final_salary >= this.salaryList[i]) {
+                  // alert("工资大于："+this.salaryList[i]);
+                  // alert("税额："+this.taxList[i]);
+                  this.income_tax += ((this.final_salary - this.salaryList[i]) * this.taxList[i]);
+                }
+              }
+            }
+          }
+          
+        },
+        components:{
+          'ending':footer,
+          'table_info':table_info,
+          nav_bar,
+        },
+      });
+    </script>
+  </body>
+</html>
